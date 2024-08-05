@@ -1,289 +1,338 @@
-# [Minimal Mistakes Jekyll theme](https://mmistakes.github.io/minimal-mistakes/)
+# Seamlessly manage your app’s Ruby environment with rbenv.
 
-[![LICENSE](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/mmistakes/minimal-mistakes/master/LICENSE)
-[![Jekyll](https://img.shields.io/badge/jekyll-%3E%3D%203.7-blue.svg)](https://jekyllrb.com/)
+rbenv is a version manager tool for the Ruby programming language on Unix-like systems. It is useful for switching between multiple Ruby versions on the same machine and for ensuring that each project you are working on always runs on the correct Ruby version.
 
-Minimal Mistakes is a flexible two-column Jekyll theme, perfect for building personal sites, blogs, and portfolios. As the name implies, styling is purposely minimalistic to be enhanced and customized by you :smile:.
+## How It Works
 
-:sparkles: See what's new in the [CHANGELOG](CHANGELOG.md).
+After rbenv injects itself into your PATH at installation time, any invocation of `ruby`, `gem`, `bundler`, or other Ruby-related executable will first activate rbenv. Then, rbenv scans the current project directory for a file named `.ruby-version`. If found, that file determines the version of Ruby that should be used within that directory. Finally, rbenv looks up that Ruby version among those installed under `~/.rbenv/versions/`.
 
-**Note:** The theme uses the [jekyll-include-cache](https://github.com/benbalter/jekyll-include-cache) plugin which will need to be installed in your `Gemfile` and must be retained in the `plugins` array of `_config.yml`. Otherwise you'll encounter `Unknown tag 'include_cached'` errors at build.
+You can choose the Ruby version for your project with, for example:
+```sh
+cd myproject
+# choose Ruby version 3.1.2:
+rbenv local 3.1.2
+```
 
-[![Minimal Mistakes live preview][2]][1]
+Doing so will create or update the `.ruby-version` file in the current directory with the version that you've chosen. A different project of yours that is another directory might be using a different version of Ruby altogether—rbenv will seamlessly transition from one Ruby version to another when you switch projects.
 
-[1]: https://mmistakes.github.io/minimal-mistakes/
-[2]: screenshot.png (live preview)
+Finally, almost every aspect of rbenv's mechanism is [customizable via plugins][plugins] written in bash.
 
-![layout examples](screenshot-layouts.png)
-
-## Notable features
-
-- Bundled as a "theme gem" for easier installation/upgrading.
-- Compatible with GitHub Pages.
-- Support for Jekyll's built-in Sass/SCSS preprocessor.
-- Nine different skins (color variations).
-- Several responsive layout options (single, archive index, search, splash, and paginated home page).
-- Optimized for search engines with support for [Twitter Cards](https://dev.twitter.com/cards/overview) and [Open Graph](http://ogp.me/) data.
-- Optional [header images](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#headers), [custom sidebars](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#sidebars), [table of contents](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#table-of-contents), [galleries](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#gallery), related posts, [breadcrumb links](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#breadcrumb-navigation-beta), [navigation lists](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#navigation-list), and more.
-- Commenting support (powered by [Disqus](https://disqus.com/), [Facebook](https://developers.facebook.com/docs/plugins/comments), Google+, [Discourse](https://www.discourse.org/), static-based via [Staticman](https://staticman.net/), [utterances](https://utteranc.es/), and [giscus](https://giscus.app/)).
-- [Google Analytics](https://www.google.com/analytics/) support.
-- UI localized text in English (default), Arabic (عربي), Brazilian Portuguese (Português brasileiro), Catalan, Chinese, Czech, Danish, Dutch, Finnish, French (Français), German (Deutsch), Greek, Hebrew, Hindi (हिंदी), Hungarian, Indonesian, Irish (Gaeilge), Italian (Italiano), Japanese, Kiswahili, Korean, Malayalam, Myanmar (Burmese), Nepali (Nepalese), Norwegian (Norsk), Persian (فارسی), Polish, Punjabi (ਪੰਜਾਬੀ), Romanian, Russian, Slovak, Spanish (Español), Swedish, Thai, Turkish (Türkçe), Ukrainian (Українська) and Vietnamese.
-
-## Skins (color variations)
-
-This theme comes in nine different skins (in addition to the default one).
-
-| `air` | `contrast` | `dark` |
-| --- | --- | --- |
-| [![air skin](https://mmistakes.github.io/minimal-mistakes/assets/images/air-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/air-skin-archive-large.png) | [![contrast skin](https://mmistakes.github.io/minimal-mistakes/assets/images/contrast-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/contrast-skin-archive-large.png) | [![dark skin](https://mmistakes.github.io/minimal-mistakes/assets/images/dark-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/dark-skin-archive-large.png) |
-
-| `dirt` | `mint` | `sunrise` |
-| --- | --- | --- |
-| [![dirt skin](https://mmistakes.github.io/minimal-mistakes/assets/images/dirt-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/dirt-skin-archive-large.png) | [![mint skin](https://mmistakes.github.io/minimal-mistakes/assets/images/mint-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/mint-skin-archive-large.png) | [![sunrise skin](https://mmistakes.github.io/minimal-mistakes/assets/images/sunrise-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/sunrise-skin-archive-large.png) |
-
-| `aqua` | `neon` | `plum` |
-| --- | --- | --- |
-| [![aqua skin](https://mmistakes.github.io/minimal-mistakes/assets/images/aqua-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/aqua-skin-archive-large.png) | [![neon skin](https://mmistakes.github.io/minimal-mistakes/assets/images/neon-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/neon-skin-archive-large.png) | [![plum skin](https://mmistakes.github.io/minimal-mistakes/assets/images/plum-skin-archive.png)](https://mmistakes.github.io/minimal-mistakes/assets/images/plum-skin-archive-large.png) |
-
-## Demo pages
-
-| Name                                        | Description                                           |
-| ------------------------------------------- | ----------------------------------------------------- |
-| [Post with Header Image][header-image-post] | A post with a large header image. |
-| [HTML Tags and Formatting Post][html-tags-post] | A variety of common markup showing how the theme styles them. |
-| [Syntax Highlighting Post][syntax-post] | Post displaying highlighted code. |
-| [Post with a Gallery][gallery-post] | A post showing several images wrapped in `<figure>` elements. |
-| [Sample Collection Page][sample-collection] | Single page from a collection. |
-| [Categories Archive][categories-archive] | Posts grouped by category. |
-| [Tags Archive][tags-archive] | Posts grouped by tag. |
-
-Additional sample posts are available under [posts archive][year-archive] on the demo site. Source files for these (and the entire demo site) can be found in [`/docs`](docs).
-
-[header-image-post]: https://mmistakes.github.io/minimal-mistakes/layout-header-image-text-readability/
-[gallery-post]: https://mmistakes.github.io/minimal-mistakes/post%20formats/post-gallery/
-[html-tags-post]: https://mmistakes.github.io/minimal-mistakes/markup/markup-html-tags-and-formatting/
-[syntax-post]: https://mmistakes.github.io/minimal-mistakes/markup-syntax-highlighting/
-[sample-collection]: https://mmistakes.github.io/minimal-mistakes/recipes/chocolate-chip-cookies/
-[categories-archive]: https://mmistakes.github.io/minimal-mistakes/categories/
-[tags-archive]: https://mmistakes.github.io/minimal-mistakes/tags/
-[year-archive]: https://mmistakes.github.io/minimal-mistakes/year-archive/
+The simplicity of rbenv has its benefits, but also some downsides. See the [comparison of version managers][alternatives] for more details and some alternatives.
 
 ## Installation
 
-There are three ways to install: as a [gem-based theme](https://jekyllrb.com/docs/themes/#understanding-gem-based-themes), as a [remote theme](https://blog.github.com/2017-11-29-use-any-theme-with-github-pages/) (GitHub Pages compatible), or forking/directly copying all of the theme files into your project.
+On systems with Homebrew package manager, the “Using Package Managers” method is recommended. On other systems, “Basic Git Checkout” might be the easiest way of ensuring that you are always installing the latest version of rbenv.
 
-### Gem-based method
+### Using Package Managers
 
-With Gem-based themes, directories such as the `assets`, `_layouts`, `_includes`, and `_sass` are stored in the theme’s gem, hidden from your immediate view. Yet all of the necessary directories will be read and processed during Jekyll’s build process.
+1. Install rbenv using one of the following approaches.
 
-This allows for easier installation and updating as you don't have to manage any of the theme files. To install:
+   #### Homebrew
+   
+   On macOS or Linux, we recommend installing rbenv with [Homebrew](https://brew.sh).
+   
+   ```sh
+   brew install rbenv
+   ```
+   
+   #### Debian, Ubuntu, and their derivatives
+       
+   > [!CAUTION]   
+   > The version of rbenv that is packaged and maintained in official
+   Debian and Ubuntu repositories is _out of date_. To install the latest
+   version, it is recommended to [install rbenv using git](#basic-git-checkout).
+   
+   ```sh
+   sudo apt install rbenv
+   ```
+   
+   #### Arch Linux and its derivatives
+   
+   Archlinux has an [AUR Package](https://aur.archlinux.org/packages/rbenv/) for
+   rbenv and you can install it from the AUR using the instructions from this
+   [wiki page](https://wiki.archlinux.org/index.php/Arch_User_Repository#Installing_and_upgrading_packages).
 
-1. Add the following to your `Gemfile`:
+   #### Fedora
 
-   ```ruby
-   gem "minimal-mistakes-jekyll"
+   Fedora has an [official package](https://packages.fedoraproject.org/pkgs/rbenv/rbenv/) which you can install:
+
+   ```sh
+   sudo dnf install rbenv
    ```
 
-2. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
+2. Set up your shell to load rbenv.
 
-   ```bash
-   bundle
-   ```
+    ```sh
+    rbenv init
+    ```
 
-3. Set the `theme` in your project's Jekyll `_config.yml` file:
+3. Close your Terminal window and open a new one so your changes take effect.
 
-   ```yaml
-   theme: minimal-mistakes-jekyll
-   ```
+That's it! You are now ready to [install some Ruby versions](#installing-ruby-versions).
 
-To update the theme run `bundle update`.
+### Basic Git Checkout
 
-### Remote theme method
+> [!NOTE]   
+> For a more automated install, you can use [rbenv-installer](https://github.com/rbenv/rbenv-installer#rbenv-installer). If you do not want to execute scripts downloaded from a web URL or simply prefer a manual approach, follow the steps below.
 
-Remote themes are similar to Gem-based themes, but do not require `Gemfile` changes or whitelisting making them ideal for sites hosted with GitHub Pages.
+This will get you going with the latest version of rbenv without needing a system-wide install.
 
-To install:
+1. Clone rbenv into `~/.rbenv`.
 
-1. Create/replace the contents of your `Gemfile` with the following:
+    ```sh
+    git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+    ```
 
-   ```ruby
-   source "https://rubygems.org"
+2. Set up your shell to load rbenv.
 
-   gem "github-pages", group: :jekyll_plugins
-   gem "jekyll-include-cache", group: :jekyll_plugins
-   ```
+    ```sh
+    ~/.rbenv/bin/rbenv init
+    ```
 
-2. Add `jekyll-include-cache` to the `plugins` array of your `_config.yml`.
+   If you are curious, see here to [understand what `init` does](#how-rbenv-hooks-into-your-shell).
 
-3. Fetch and update bundled gems by running the following [Bundler](https://bundler.io/) command:
+3. Restart your shell so that these changes take effect. (Opening a new terminal tab will usually do it.)
 
-   ```bash
-   bundle
-   ```
+#### Shell completions
 
-4. Add `remote_theme: "mmistakes/minimal-mistakes@4.26.2"` to your `_config.yml` file. Remove any other `theme:` or `remote_theme:` entry.
+When _manually_ installing rbenv, it might be useful to note how completion scripts for various shells work. Completion scripts help with typing rbenv commands by expanding partially entered rbenv command names and option flags; typically this is invoked by pressing <kbd>Tab</kbd> key in an interactive shell.
 
-<!--
-  Dev note: The version number is currently hard-coded in these files:
+- The **bash** completion script for rbenv ships with the project and gets [loaded by the `rbenv init` mechanism](#how-rbenv-hooks-into-your-shell).
 
-    - package.json
-    - README.md (this file)
-    - docs/_data/theme.yml
-    - docs/_pages/home.md (in Front Matter "excerpt")
+- The **zsh** completion script ships with the project, but needs to be added to FPATH in zsh before it can be discovered by the shell. One way to do this would be to edit `~/.zshrc`:
 
-  `package.json` holds the authoritative version number, and the others can be updated with `bundle exec rake version`.
+  ```sh
+  # assuming that rbenv was installed to `~/.rbenv`
+  FPATH=~/.rbenv/completions:"$FPATH"
 
-  The following files should also be regenerated:
+  autoload -U compinit
+  compinit
+  ```
 
-    - _includes/copyright.html, _includes/copyright.js, _sass/minimal-mistakes/_copyright.scss
-      (Run `bundle exec rake clean` then `bundle exec rake copyright` - all three references `package.json`)
-    - assets/js/main.min.js (Run `bundle exec rake js`, references `_includes/copyright.js`)
+- The **fish** completion script for rbenv ships with the fish shell itself and is not maintained by the rbenv project.
 
-  *Tip*: The default Rake task will update all of the above files at once.
+### Installing Ruby versions
 
-  Additionally, the license year is hard-coded in these files and are NOT covered by a Rake task:
+The `rbenv install` command does not ship with rbenv out-of-the-box, but is provided by the [ruby-build][] plugin.
 
-    - README.md (this file, near the end)
-    - LICENSE
--->
+Before attempting to install Ruby, **check that [your build environment](https://github.com/rbenv/ruby-build/wiki#suggested-build-environment) has the necessary tools and libraries**. Then:
 
-**Looking for an example?** Use the [Minimal Mistakes remote theme starter](https://github.com/mmistakes/mm-github-pages-starter/generate) for the quickest method of getting a GitHub Pages hosted site up and running. Generate a new repository from the starter, replace sample content with your own, and configure as needed.
+```sh
+# list latest stable versions:
+rbenv install -l
 
-## Usage
+# list all local versions:
+rbenv install -L
 
-For detailed instructions on how to configure, customize, add/migrate content, and more read the [theme's documentation](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/).
+# install a Ruby version:
+rbenv install 3.1.2
+```
 
-## Contributing
+For troubleshooting `BUILD FAILED` scenarios, check the [ruby-build Discussions section](https://github.com/rbenv/ruby-build/discussions/categories/build-failures).
 
-Found a typo in the documentation or interested in [fixing a bug](https://github.com/mmistakes/minimal-mistakes/issues)? Then by all means [submit an issue](https://github.com/mmistakes/minimal-mistakes/issues/new) or [pull request](https://help.github.com/articles/using-pull-requests/). If this is your first pull request, it may be helpful to read up on the [GitHub Flow](https://guides.github.com/introduction/flow/) first.
+> [!NOTE]  
+> If the `rbenv install` command wasn't found, you can install ruby-build as a plugin:
+> ```sh
+> git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+> ```
 
-For help with using the theme or general Jekyll support questions, please use the [Jekyll Talk forums](https://talk.jekyllrb.com/).
+Set a Ruby version to finish installation and start using Ruby:
+```sh
+rbenv global 3.1.2   # set the default Ruby version for this machine
+# or:
+rbenv local 3.1.2    # set the Ruby version for this directory
+```
 
-### Pull Requests
+Alternatively to the `rbenv install` command, you can download and compile Ruby manually as a subdirectory of `~/.rbenv/versions`. An entry in that directory can also be a symlink to a Ruby version installed elsewhere on the filesystem.
 
-When submitting a pull request:
+#### Installing Ruby gems
 
-1. Clone the repo.
-2. Create a branch off of `master` and give it a meaningful name (e.g. `my-awesome-new-feature`).
-3. Open a pull request on GitHub and describe the feature or fix.
+Select a Ruby version for your project using `rbenv local 3.1.2`, for example. Then, proceed to install gems as you normally would:
 
-Theme documentation and demo pages can be found in the [`/docs`](docs) if submitting improvements, typo corrections, etc.
+```sh
+gem install bundler
+```
+
+> [!NOTE]  
+> You _should not use sudo_ to install gems. Typically, the Ruby versions will be installed under your home directory and thus writeable by your user. If you get the “you don't have write permissions” error when installing gems, it's likely that your "system" Ruby version is still a global default. Change that with `rbenv global <version>` and try again.
+
+Check the location where gems are being installed with `gem env`:
+
+```sh
+gem env home
+# => ~/.rbenv/versions/<version>/lib/ruby/gems/...
+```
+
+#### Uninstalling Ruby versions
+
+As time goes on, Ruby versions you install will accumulate in your
+`~/.rbenv/versions` directory.
+
+To remove old Ruby versions, simply `rm -rf` the directory of the
+version you want to remove. You can find the directory of a particular
+Ruby version with the `rbenv prefix` command, e.g. `rbenv prefix
+2.7.0`.
+
+The [ruby-build][] plugin provides an `rbenv uninstall` command to
+automate the removal process.
+
+## Command Reference
+
+The main rbenv commands you need to know are:
+
+### rbenv versions
+
+Lists all Ruby versions known to rbenv, and shows an asterisk next to
+the currently active version.
+
+    $ rbenv versions
+      1.8.7-p352
+      1.9.2-p290
+    * 1.9.3-p327 (set by /Users/sam/.rbenv/version)
+      jruby-1.7.1
+      rbx-1.2.4
+      ree-1.8.7-2011.03
+
+### rbenv version
+
+Displays the currently active Ruby version, along with information on
+how it was set.
+
+    $ rbenv version
+    1.9.3-p327 (set by /Users/sam/.rbenv/version)
+
+### rbenv local
+
+Sets a local application-specific Ruby version by writing the version
+name to a `.ruby-version` file in the current directory. This version
+overrides the global version, and can be overridden itself by setting
+the `RBENV_VERSION` environment variable or with the `rbenv shell`
+command.
+
+    rbenv local 3.1.2
+
+When run without a version number, `rbenv local` reports the currently
+configured local version. You can also unset the local version:
+
+    rbenv local --unset
+
+### rbenv global
+
+Sets the global version of Ruby to be used in all shells by writing
+the version name to the `~/.rbenv/version` file. This version can be
+overridden by an application-specific `.ruby-version` file, or by
+setting the `RBENV_VERSION` environment variable.
+
+    rbenv global 3.1.2
+
+The special version name `system` tells rbenv to use the system Ruby
+(detected by searching your `$PATH`).
+
+When run without a version number, `rbenv global` reports the
+currently configured global version.
+
+### rbenv shell
+
+Sets a shell-specific Ruby version by setting the `RBENV_VERSION`
+environment variable in your shell. This version overrides
+application-specific versions and the global version.
+
+    rbenv shell jruby-1.7.1
+
+When run without a version number, `rbenv shell` reports the current
+value of `RBENV_VERSION`. You can also unset the shell version:
+
+    rbenv shell --unset
+
+Note that you'll need rbenv's shell integration enabled (step 3 of
+the installation instructions) in order to use this command. If you
+prefer not to use shell integration, you may simply set the
+`RBENV_VERSION` variable yourself:
+
+    export RBENV_VERSION=jruby-1.7.1
+
+### rbenv rehash
+
+Installs shims for all Ruby executables known to rbenv (`~/.rbenv/versions/*/bin/*`). Typically you do not need to run this command, as it will run automatically after installing gems.
+
+    rbenv rehash
+
+### rbenv which
+
+Displays the full path to the executable that rbenv will invoke when
+you run the given command.
+
+    $ rbenv which irb
+    /Users/sam/.rbenv/versions/1.9.3-p327/bin/irb
+
+### rbenv whence
+
+Lists all Ruby versions that contain the specified executable name.
+
+    $ rbenv whence rackup
+    1.9.3-p327
+    jruby-1.7.1
+    ree-1.8.7-2011.03
+
+## Environment variables
+
+You can affect how rbenv operates with the following settings:
+
+name | default | description
+-----|---------|------------
+`RBENV_VERSION` | | Specifies the Ruby version to be used.<br>Also see [`rbenv shell`](#rbenv-shell)
+`RBENV_ROOT` | `~/.rbenv` | Defines the directory under which Ruby versions and shims reside.<br>Also see `rbenv root`
+`RBENV_DEBUG` | | Outputs debug information.<br>Also as: `rbenv --debug <subcommand>`
+`RBENV_HOOK_PATH` | [_see wiki_][hooks] | Colon-separated list of paths searched for rbenv hooks.
+`RBENV_DIR` | `$PWD` | Directory to start searching for `.ruby-version` files.
+
+### How rbenv hooks into your shell
+
+`rbenv init` is a helper command to bootstrap rbenv into a shell. This helper is part of the recommended installation instructions, but optional, as an advanced user can set up the following tasks manually. Here is what the command does when its output is `eval`'d by a shell during its startup:
+
+0. Adds `rbenv` executable to PATH if necessary.
+
+1. Prepends `~/.rbenv/shims` directory to PATH. This is basically the only requirement for rbenv to function properly.
+
+2. Installs bash shell completion for rbenv commands.
+
+3. Regenerates rbenv shims. If this step slows down your shell startup, you can invoke `rbenv init -` with the `--no-rehash` flag.
+
+4. Installs the "sh" dispatcher. This bit is also optional, but allows rbenv and plugins to change variables in your current shell, making commands like `rbenv shell` possible.
+
+You can run `rbenv init -` for yourself to inspect the generated script.
+
+### Uninstalling rbenv
+
+The simplicity of rbenv makes it easy to temporarily disable it, or
+uninstall from the system.
+
+1. To **disable** rbenv managing your Ruby versions, simply comment or remove the `rbenv init` line from your shell startup configuration. This will remove rbenv shims directory from PATH, and future invocations like `ruby` will execute the system Ruby version, bypassing rbenv completely.
+
+   While disabled, `rbenv` will still be accessible on the command line, but your Ruby apps won't be affected by version switching.
+
+2. To completely **uninstall** rbenv, perform step (1) and then remove the rbenv root directory. This will **delete all Ruby versions** that were installed under `` `rbenv root`/versions/ ``:
+
+       rm -rf "$(rbenv root)"
+
+   If you've installed rbenv using a package manager, as a final step
+   perform the rbenv package removal:
+   - Homebrew: `brew uninstall rbenv`
+   - Debian, Ubuntu, and their derivatives: `sudo apt purge rbenv`
+   - Archlinux and its derivatives: `sudo pacman -R rbenv`
 
 ## Development
 
-To set up your environment to develop this theme, run `bundle install`.
+Tests are executed using [Bats](https://github.com/bats-core/bats-core):
 
-To test the theme, run `bundle exec rake preview` and open your browser at `http://localhost:4000/test/`. This starts a Jekyll server using content in the `test/` directory. As modifications are made to the theme and test site, it will regenerate and you should see the changes in the browser after a refresh.
+    $ bats test
+    $ bats test/<file>.bats
 
-## Credits
+Please feel free to submit pull requests and file bugs on the [issue
+tracker](https://github.com/rbenv/rbenv/issues).
 
-### Creator
 
-**Michael Rose**
-
-- <https://mademistakes.com>
-- <https://twitter.com/mmistakes>
-- <https://github.com/mmistakes>
-
-### Icons + Demo Images:
-
-- [The Noun Project](https://thenounproject.com) - Garrett Knoll, Arthur Shlain, and [tracy tam](https://thenounproject.com/tracytam)
-- [Font Awesome](http://fontawesome.io/)
-- [Unsplash](https://unsplash.com/)
-
-### Other:
-
-- [Jekyll](http://jekyllrb.com/)
-- [jQuery](http://jquery.com/)
-- [Susy](http://susy.oddbird.net/)
-- [Breakpoint](http://breakpoint-sass.com/)
-- [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/)
-- [FitVids.JS](http://fitvidsjs.com/)
-- [GreedyNav.js](https://github.com/lukejacksonn/GreedyNav)
-- [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-- [Gumshoe](https://github.com/cferdinandi/gumshoe)
-- [jQuery throttle / debounce](http://benalman.com/projects/jquery-throttle-debounce-plugin/)
-- [Lunr](http://lunrjs.com)
-- [Clipboard.js](https://clipboardjs.com)
-
-## License
-
-The MIT License (MIT)
-
-Copyright (c) 2013-2024 Michael Rose and contributors
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-Minimal Mistakes incorporates icons from [The Noun Project](https://thenounproject.com/) 
-creators Garrett Knoll, Arthur Shlain, and tracy tam.
-Icons are distributed under Creative Commons Attribution 3.0 United States (CC BY 3.0 US).
-
-Minimal Mistakes incorporates [Font Awesome](http://fontawesome.io/),
-Copyright (c) 2017 Dave Gandy.
-Font Awesome is distributed under the terms of the [SIL OFL 1.1](http://scripts.sil.org/OFL) 
-and [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates photographs from [Unsplash](https://unsplash.com).
-
-Minimal Mistakes incorporates [Susy](http://susy.oddbird.net/),
-Copyright (c) 2017, Miriam Eric Suzanne.
-Susy is distributed under the terms of the [BSD 3-clause "New" or "Revised" License](https://opensource.org/licenses/BSD-3-Clause).
-
-Minimal Mistakes incorporates [Breakpoint](http://breakpoint-sass.com/).
-Breakpoint is distributed under the terms of the [MIT/GPL Licenses](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [FitVids.js](https://github.com/davatron5000/FitVids.js/),
-Copyright (c) 2013 Dave Rubert and Chris Coyier.
-FitVids is distributed under the terms of the [WTFPL License](http://www.wtfpl.net/).
-
-Minimal Mistakes incorporates [Magnific Popup](http://dimsemenov.com/plugins/magnific-popup/),
-Copyright (c) 2014-2016 Dmitry Semenov, http://dimsemenov.com.
-Magnific Popup is distributed under the terms of the MIT License.
-
-Minimal Mistakes incorporates [Smooth Scroll](http://github.com/cferdinandi/smooth-scroll),
-Copyright (c) 2019 Chris Ferdinandi.
-Smooth Scroll is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Gumshoejs](http://github.com/cferdinandi/gumshoe),
-Copyright (c) 2019 Chris Ferdinandi.
-Gumshoejs is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [jQuery throttle / debounce](http://benalman.com/projects/jquery-throttle-debounce-plugin/),
-Copyright (c) 2010 "Cowboy" Ben Alman.
-jQuery throttle / debounce is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [GreedyNav.js](https://github.com/lukejacksonn/GreedyNav),
-Copyright (c) 2015 Luke Jackson.
-GreedyNav.js is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Jekyll Group-By-Array](https://github.com/mushishi78/jekyll-group-by-array),
-Copyright (c) 2015 Max White <mushishi78@gmail.com>.
-Jekyll Group-By-Array is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [@allejo's Pure Liquid Jekyll Table of Contents](https://allejo.io/blog/a-jekyll-toc-in-liquid-only/),
-Copyright (c) 2017 Vladimir Jimenez.
-Pure Liquid Jekyll Table of Contents is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [Lunr](http://lunrjs.com),
-Copyright (c) 2018 Oliver Nightingale.
-Lunr is distributed under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
-Minimal Mistakes incorporates [clipboard.js](https://clipboardjs.com/),
-Copyright (c) 2021 Zeno Rocha.
-Clipboard.js is distributed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+  [ruby-build]: https://github.com/rbenv/ruby-build#readme
+  [hooks]: https://github.com/rbenv/rbenv/wiki/Authoring-plugins#rbenv-hooks
+  [alternatives]: https://github.com/rbenv/rbenv/wiki/Comparison-of-version-managers
+  [plugins]: https://github.com/rbenv/rbenv/wiki/Plugins
