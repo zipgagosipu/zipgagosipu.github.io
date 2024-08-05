@@ -1,11 +1,18 @@
 require 'json'
 
-file = File.read('package.json')
-package_json = JSON.parse(file)
+package_json_path = 'package.json'
+
+if File.exist?(package_json_path)
+  file = File.read(package_json_path)
+  package_json = JSON.parse(file)
+  version = package_json["version"]
+else
+  version = "0.0.1" # package.json 파일이 없을 경우 기본 버전 설정
+end
 
 Gem::Specification.new do |spec|
   spec.name                    = "minimal-mistakes-jekyll"
-  spec.version                 = package_json["version"]
+  spec.version                 = version
   spec.authors                 = ["Michael Rose", "iBug"]
 
   spec.summary                 = %q{A flexible two-column Jekyll theme.}
