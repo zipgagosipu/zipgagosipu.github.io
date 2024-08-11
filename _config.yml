@@ -13,26 +13,26 @@ theme: "minimal-mistakes-jekyll"
 # remote_theme: "mmistakes/minimal-mistakes"
 
 # Minimal Mistakes Specific Settings
-minimal_mistakes_skin: "neon" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin: "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale: "en-US"
+locale: "ko-KR"
 rtl: false # true, false (default) # turns direction of the page into right to left for RTL languages
-title: "Your Site Title"
-title_separator: "-"
-subtitle: "Your Site Tagline"
-name: "Your Name"
-description: "An amazing website."
+title: "chulwoong"
+title_separator: "|"
+subtitle: "just do it"
+name: "kcw"
+description: "김철웅의 블로그 입니다."
 url: "https://zipgagosipu.github.io"
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "zipgagosipu/zipgagosipu.github.io"
-teaser: "/assets/images/500x300.png" # path of fallback teaser image
-logo: "/assets/images/88x88.png" # path of logo image to display in the masthead
-masthead_title: "Your Masthead Title" # overrides the website title displayed in the masthead
+teaser: "/assets/images/kcw_test.jpeg" # path of fallback teaser image
+logo: "/assets/images/kcw_test.jpeg"
+masthead_title: "최후연에게 잔소리 일발장전!!!!!!!!!" # overrides the website title displayed in the masthead
 breadcrumbs: true # true, false (default)
 words_per_minute: 200
 enable_copy_code_button: true # true, false (default)
-copyright: "Your Name"
+copyright: "chulwoongkim"
 copyright_url: "https://zipgagosipu.github.io"
 
 # Comments
@@ -48,52 +48,52 @@ analytics:
 
 # Site Author
 author:
-  name: "Your Name"
-  avatar: "/assets/images/bio-photo.jpg" # path of avatar image
-  bio: "I am an **amazing** person."
-  location: "Somewhere"
-  email: "your-email@example.com"
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:your.email@example.com"
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://your-website.com"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/yourusername"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: "https://facebook.com/yourusername"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/yourusername"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/yourusername"
+  name: "철웅노트"
+  avatar: "/assets/images/kcw_test.jpeg" # path of avatar image
+  bio: "김철웅의 샘플 블로그 입니다"
+  # location: "남조선"
+  # email: "cw.kim@boosters.kr"
+  # links:
+  #   - label: "Email"
+  #     icon: "fas fa-fw fa-envelope-square"
+  #     url: "mailto:cw.kim@boosters.kr"
+    # - label: "Website"
+    #   icon: "fas fa-fw fa-link"
+    #   url: "https://your-website.com"
+    # - label: "Twitter"
+    #   icon: "fab fa-fw fa-twitter-square"
+    #   url: "https://twitter.com/yourusername"
+    # - label: "Facebook"
+    #   icon: "fab fa-fw fa-facebook-square"
+    #   url: "https://facebook.com/yourusername"
+    # - label: "GitHub"
+    #   icon: "fab fa-fw fa-github"
+    #   url: "https://github.com/yourusername"
+    # - label: "Instagram"
+    #   icon: "fab fa-fw fa-instagram"
+    #   url: "https://instagram.com/yourusername"
 
 # Site Footer
-footer:
-  links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/yourusername"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: "https://facebook.com/yourusername"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/yourusername"
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      url: "https://gitlab.com/yourusername"
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      url: "https://bitbucket.org/yourusername"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/yourusername"
+# footer:
+#   links:
+#     - label: "Twitter"
+#       icon: "fab fa-fw fa-twitter-square"
+#       url: "https://twitter.com/yourusername"
+#     - label: "Facebook"
+#       icon: "fab fa-fw fa-facebook-square"
+#       url: "https://facebook.com/yourusername"
+#     - label: "GitHub"
+#       icon: "fab fa-fw fa-github"
+#       url: "https://github.com/yourusername"
+#     - label: "GitLab"
+#       icon: "fab fa-fw fa-gitlab"
+#       url: "https://gitlab.com/yourusername"
+#     - label: "Bitbucket"
+#       icon: "fab fa-fw fa-bitbucket"
+#       url: "https://bitbucket.org/yourusername"
+#     - label: "Instagram"
+#       icon: "fab fa-fw fa-instagram"
+#       url: "https://instagram.com/yourusername"
 
 # Reading Files
 include:
@@ -237,3 +237,5 @@ defaults:
       comments: true
       share: true
       related: true
+      show_date : true
+      date_format: "%Y-%m-%d"
